@@ -955,7 +955,19 @@
           let invoices = JSON.parse(this.response);
           let invoicesList = invoices.invoices;
 
+
           invoicesList.forEach(element => {
+
+            
+
+
+
+
+
+
+
+
+
             let updateCard = `<tr>
                               <td>${element.invoicenumber}</td>
                               <td>${element.customer}</td>
@@ -963,7 +975,7 @@
                               <td class="font-weight-bold">${element.totalprice}</td>
                               <td>${element.customerprice}</td>
                               <td>
-                              <div class="badge badge-success badge-fw">Progress</div>
+                              <div class="badge badge-success badge-fw">${element.status}</div>
                               </td>
                               </tr>`
             
