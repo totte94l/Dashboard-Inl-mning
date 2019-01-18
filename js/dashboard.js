@@ -2,6 +2,20 @@
   'use strict';
   $(function() {
 
+    // Greeting
+    if( $("#welcome-greeting").length ) {
+      let request = new XMLHttpRequest();
+
+      request.onload = function() {
+        if( this.readyState == 4 && this.status == 200) {
+          let user = JSON.parse(this.response);
+
+          $("#welcome-greeting").text(`Hello ${user.firstname}!`);
+        }
+      }
+      request.open("GET", "https://fe18.azurewebsites.net/api/user", true);
+      request.send();
+    }
     // Green Box
     if( $("#total-sales-amount").length ) {
       let request = new XMLHttpRequest();
