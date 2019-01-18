@@ -957,25 +957,28 @@
 
 
           invoicesList.forEach(element => {
+            let currentStatus
 
-            
-
-
-
-
-
-
-
-
-
+            switch (element.status) {
+              case "Pågående":
+                currentStatus = "success"
+                break;
+              case "Öppen":
+                currentStatus = "warning"
+                break;
+              case "Tillfälligt stoppad":
+                currentStatus = "danger"
+                break;
+            }
             let updateCard = `<tr>
+            
                               <td>${element.invoicenumber}</td>
                               <td>${element.customer}</td>
                               <td>${element.shipping}</td>
                               <td class="font-weight-bold">${element.totalprice}</td>
                               <td>${element.customerprice}</td>
                               <td>
-                              <div class="badge badge-success badge-fw">${element.status}</div>
+                              <div class="badge badge-${currentStatus} badge-fw">${element.status}</div>
                               </td>
                               </tr>`
             
