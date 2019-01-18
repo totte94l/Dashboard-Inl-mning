@@ -35,6 +35,9 @@
                       </span>
                     </div>
                     <input type="email" class="form-control form-control-lg border-left-0" id="inputEmail" placeholder="Username">
+                    <div class="invalid-feedback">
+                      Du måste ange en epostaddress
+                    </div>
                   </div>
                 </div>
                 <div class="form-group">
@@ -45,7 +48,10 @@
                         <i class="mdi mdi-lock-outline text-primary"></i>
                       </span>
                     </div>
-                    <input type="password" class="form-control form-control-lg border-left-0" id="inputPassword" placeholder="Password">                        
+                    <input type="password" class="form-control form-control-lg border-left-0" id="inputPassword" placeholder="Password">            
+                    <div class="invalid-feedback">
+                      Du måste ange en e-postadress och lösenord för att logga in!
+                    </div>            
                   </div>
                 </div>
                 <div class="my-2 d-flex justify-content-between align-items-center">
@@ -58,7 +64,7 @@
                   <a href="#" class="auth-link text-black">Forgot password?</a>
                 </div>
                 <div class="my-3">
-                  <a class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" href="index.html">LOGIN</a>
+                  <a id="btn-login" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">LOGIN</a>
                 </div>
                 <div class="mb-2 d-flex">
                   <button type="button" class="btn btn-facebook auth-form-btn flex-grow mr-1">
@@ -83,9 +89,7 @@
   </div>
   <script src="vendors/js/vendor.bundle.base.js"></script>
   <script src="vendors/js/vendor.bundle.addons.js"></script>
-  <script>
-    
-  </script>
+  <script src="js/login.js"></script>
 </body>
 
 </html>
