@@ -809,18 +809,21 @@
           let tickets = ticketsInfo.tickets;
 
           //Genererar åren i dropdown'en
+          let counter = 0;
           years.forEach(element => {
             $("#ticket-sort").append(`<a class="dropdown-item" data-year="${element}">${element}`);
           });
 
           //Genererar en tabell med alla tickets
-
-          let counter = 0;
           tickets.forEach(element => {
+            let matches = tickets[counter].fullname.match(/\b(\w)/g);
+            let shortName = matches.join('');
+            
+
             let tempTicket =  `<tr>
                               <td class="pl-0">
                               <div class="icon-rounded-primary icon-rounded-md">
-                              <h4 class="font-weight-medium">${tickets[counter].fullname}</h4>
+                              <h4 class="font-weight-medium">${shortName}</h4>
                               </div>
                               </td>
                               <td>
@@ -844,6 +847,102 @@
         }
       }
       request.open("GET", "https://fe18.azurewebsites.net/api/tickets", true);
+      request.send();
+    }
+
+    // Sort Ticket Table
+    function sortTable(year) {
+      let request = new XMLHttpRequest();
+
+      request.onload = function() {
+        if( this.readyState == 4 && this.status == 200) {
+          let ticketsInfo = JSON.parse(this.response);
+          let tickets = ticketsInfo.tickets;
+          let sortMatch = new Array();
+          let counter = 0;
+
+          // Creates a array with all tickets that matches the selected year
+          tickets.forEach(element => {
+              
+            let date = new Date(element.date);
+            let ticketYear = date.getFullYear();
+
+            if(ticketYear == year) {
+              sortMatch.push(element);
+              console.log(`${ticketYear} | ${year}`);
+            } 
+          });
+
+          // Clears the table
+          $('#ticket-table').html("");
+
+          // Adds the matched tickets to the table
+          sortMatch.forEach(element => {
+            let matches = tickets[counter].fullname.match(/\b(\w)/g);
+            let shortName = matches.join('');
+            
+
+            let tempTicket =  `<tr>
+                              <td class="pl-0">
+                              <div class="icon-rounded-primary icon-rounded-md">
+                              <h4 class="font-weight-medium">${shortName}</h4>
+                              </div>
+                              </td>
+                              <td>
+                              <p class="mb-0">${tickets[counter].fullname}</p>
+                              <p class="text-muted mb-0">${tickets[counter].city}</p>
+                              </td>
+                              <td>
+                              <p class="mb-0">${tickets[counter].date}</p>
+                              <p class="text-muted mb-0"> ${tickets[counter].time}</p>
+                              </td>
+                              <td>
+                              <p class="mb-0">${tickets[counter].project}</p>
+                              <p class="text-muted mb-0">${tickets[counter].status}</p>
+                              </td>
+                              </tr>`;
+            
+            counter++; 
+            $('#ticket-table').append(tempTicket);
+          });
+        }
+
+        // Clears the array so user can filter again. Missade nästan detta då det inte fanns några andra år än 2019 inlagt!
+        sortMatch = [];
+      }
+      request.open("GET", "https://fe18.azurewebsites.net/api/tickets", true);
+      request.send();
+    }
+
+    // Filter tickets click event
+    $("#dropdownMenuDate1").on("click", function() {
+      $(".dropdown-item").on("click", function() {
+        sortTable($(this).attr("data-year"));
+    })
+    })
+
+    // Updates
+    if( $("#updates-list").length ) {
+      let request = new XMLHttpRequest();
+
+      request.onload = function() {
+        if( this.readyState == 4 && this.status == 200) {
+          let updates = JSON.parse(this.response);
+          let updatesList = updates.updates;
+
+          updatesList.forEach(element => {
+            let updateCard = `<li>
+                              <h6>${element.title}</h6>
+                              <p class="mt-2">${element.description}</p>
+                              <p class="text-muted mb-4"><i class="mdi mdi-clock-outline"></i>${element.time}</p>
+                              </li>`
+            
+            $("#updates-list").append(updateCard);
+          });
+
+        }
+      }
+      request.open("GET", "https://fe18.azurewebsites.net/api/updates", true);
       request.send();
     }
 
