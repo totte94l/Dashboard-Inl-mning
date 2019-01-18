@@ -804,7 +804,42 @@
 
       request.onload = function() {
         if( this.readyState == 4 && this.status == 200) {
-          let greenbox = JSON.parse(this.response);
+          let ticketsInfo = JSON.parse(this.response);
+          let years = ticketsInfo.years;
+          let tickets = ticketsInfo.tickets;
+
+          //Genererar åren i dropdown'en
+          years.forEach(element => {
+            $("#ticket-sort").append(`<a class="dropdown-item" data-year="${element}">${element}`);
+          });
+
+          //Genererar en tabell med alla tickets
+
+          let counter = 0;
+          tickets.forEach(element => {
+            let tempTicket =  `<tr>
+                              <td class="pl-0">
+                              <div class="icon-rounded-primary icon-rounded-md">
+                              <h4 class="font-weight-medium">${tickets[counter].fullname}</h4>
+                              </div>
+                              </td>
+                              <td>
+                              <p class="mb-0">${tickets[counter].fullname}</p>
+                              <p class="text-muted mb-0">${tickets[counter].city}</p>
+                              </td>
+                              <td>
+                              <p class="mb-0">${tickets[counter].date}</p>
+                              <p class="text-muted mb-0"> ${tickets[counter].time}</p>
+                              </td>
+                              <td>
+                              <p class="mb-0">${tickets[counter].project}</p>
+                              <p class="text-muted mb-0">${tickets[counter].status}</p>
+                              </td>
+                              </tr>`;
+            
+            counter++; 
+            $('#ticket-table').append(tempTicket);
+          });
 
         }
       }
