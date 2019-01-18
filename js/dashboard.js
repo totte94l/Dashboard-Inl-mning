@@ -16,6 +16,12 @@
       request.open("GET", "https://fe18.azurewebsites.net/api/user", true);
       request.send();
     }
+
+    //Logout
+    $("#btn-logout").on("click", function() {
+       window.location.replace("index.html");
+    })
+
     // Green Box
     if( $("#total-sales-amount").length ) {
       let request = new XMLHttpRequest();
@@ -88,7 +94,7 @@
       request.send();
     }
 
-    //Total Sales Chart
+    // Total Sales Chart
     if ($("#total-sales-chart").length) {
       let request = new XMLHttpRequest();
 
@@ -226,6 +232,7 @@
       request.send();
     }
 
+    // User Charts
     if ($("#users-chart").length) {
       let request = new XMLHttpRequest();
 
