@@ -946,5 +946,30 @@
       request.send();
     }
 
+    // Open Invoices
+    if( $("#updates-list").length ) {
+      let request = new XMLHttpRequest();
+
+      request.onload = function() {
+        if( this.readyState == 4 && this.status == 200) {
+          let updates = JSON.parse(this.response);
+          let updatesList = updates.updates;
+
+          updatesList.forEach(element => {
+            let updateCard = `<li>
+                              <h6>${element.title}</h6>
+                              <p class="mt-2">${element.description}</p>
+                              <p class="text-muted mb-4"><i class="mdi mdi-clock-outline"></i>${element.time}</p>
+                              </li>`
+            
+            $("#updates-list").append(updateCard);
+          });
+
+        }
+      }
+      request.open("GET", "https://fe18.azurewebsites.net/api/openinvoices", true);
+      request.send();
+    }
+
   });
 })(jQuery);
