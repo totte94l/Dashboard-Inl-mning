@@ -1,13 +1,13 @@
-(function($) {
+(function ($) {
   'use strict';
-  $(function() {
+  $(function () {
 
     // Greeting
-    if( $("#welcome-greeting").length ) {
+    if ($("#welcome-greeting").length) {
       let request = new XMLHttpRequest();
 
-      request.onload = function() {
-        if( this.readyState == 4 && this.status == 200) {
+      request.onload = function () {
+        if (this.readyState == 4 && this.status == 200) {
           let user = JSON.parse(this.response);
 
           $("#welcome-greeting").text(`Hello ${user.firstname}!`);
@@ -18,16 +18,16 @@
     }
 
     //Logout
-    $("#btn-logout").on("click", function() {
-       window.location.replace("index.html");
+    $("#btn-logout").on("click", function () {
+      window.location.replace("index.html");
     })
 
     // Green Box
-    if( $("#total-sales-amount").length ) {
+    if ($("#total-sales-amount").length) {
       let request = new XMLHttpRequest();
 
-      request.onload = function() {
-        if( this.readyState == 4 && this.status == 200) {
+      request.onload = function () {
+        if (this.readyState == 4 && this.status == 200) {
           let greenbox = JSON.parse(this.response);
           let amount = greenbox.amount;
           let currency = greenbox.currency;
@@ -41,11 +41,11 @@
     }
 
     // Blue Box
-    if( $("#total-purchases-amount").length ) {
+    if ($("#total-purchases-amount").length) {
       let request = new XMLHttpRequest();
 
-      request.onload = function() {
-        if( this.readyState == 4 && this.status == 200) {
+      request.onload = function () {
+        if (this.readyState == 4 && this.status == 200) {
           let bluebox = JSON.parse(this.response);
           let amount = bluebox.amount;
           let currency = bluebox.currency;
@@ -59,11 +59,11 @@
     }
 
     // Red Box
-    if( $("#total-purchases-amount").length ) {
+    if ($("#total-purchases-amount").length) {
       let request = new XMLHttpRequest();
 
-      request.onload = function() {
-        if( this.readyState == 4 && this.status == 200) {
+      request.onload = function () {
+        if (this.readyState == 4 && this.status == 200) {
           let redbox = JSON.parse(this.response);
           let amount = redbox.amount;
           let currency = redbox.currency;
@@ -77,11 +77,11 @@
     }
 
     // Yellow Box
-    if( $("#total-growth-amount").length ) {
+    if ($("#total-growth-amount").length) {
       let request = new XMLHttpRequest();
 
-      request.onload = function() {
-        if( this.readyState == 4 && this.status == 200) {
+      request.onload = function () {
+        if (this.readyState == 4 && this.status == 200) {
           let orangebox = JSON.parse(this.response);
           let amount = orangebox.amount;
           let currency = orangebox.currency;
@@ -98,8 +98,8 @@
     if ($("#total-sales-chart").length) {
       let request = new XMLHttpRequest();
 
-      request.onload = function() {
-        if( this.readyState == 4 && this.status == 200) {
+      request.onload = function () {
+        if (this.readyState == 4 && this.status == 200) {
           let totalSales = JSON.parse(this.response);
 
           // Chart
@@ -163,7 +163,7 @@
                 ticks: {
                   display: true,
                   padding: 20,
-                  fontColor:"#000",
+                  fontColor: "#000",
                   fontSize: 14
                 },
                 gridLines: {
@@ -184,18 +184,18 @@
                   fontSize: 14,
                   padding: 18,
                   stepSize: 100000,
-                  callback: function(value) {
+                  callback: function (value) {
                     var ranges = [
-                        { divider: 1e6, suffix: 'M' },
-                        { divider: 1e3, suffix: 'k' }
+                      { divider: 1e6, suffix: 'M' },
+                      { divider: 1e3, suffix: 'k' }
                     ];
                     function formatNumber(n) {
-                        for (var i = 0; i < ranges.length; i++) {
-                          if (n >= ranges[i].divider) {
-                              return (n / ranges[i].divider).toString() + ranges[i].suffix;
-                          }
+                      for (var i = 0; i < ranges.length; i++) {
+                        if (n >= ranges[i].divider) {
+                          return (n / ranges[i].divider).toString() + ranges[i].suffix;
                         }
-                        return n;
+                      }
+                      return n;
                     }
                     return formatNumber(value);
                   }
@@ -236,8 +236,8 @@
     if ($("#users-chart").length) {
       let request = new XMLHttpRequest();
 
-      request.onload = function() {
-        if( this.readyState == 4 && this.status == 200) {
+      request.onload = function () {
+        if (this.readyState == 4 && this.status == 200) {
           let users = JSON.parse(this.response);
           let amount = users.users;
           let growth = users.growth;
@@ -251,15 +251,15 @@
           var areaData = {
             labels: months,
             datasets: [{
-                data: data,
-                backgroundColor: [
-                  '#e0fff4'
-                ],
-                borderWidth: 2,
-                borderColor: "#00c689",
-                fill: 'origin',
-                label: label
-              }
+              data: data,
+              backgroundColor: [
+                '#e0fff4'
+              ],
+              borderWidth: 2,
+              borderColor: "#00c689",
+              fill: 'origin',
+              label: label
+            }
             ]
           };
           var areaOptions = {
@@ -329,8 +329,8 @@
     if ($("#projects-chart").length) {
       let request = new XMLHttpRequest();
 
-      request.onload = function() {
-        if( this.readyState == 4 && this.status == 200) {
+      request.onload = function () {
+        if (this.readyState == 4 && this.status == 200) {
 
           let projects = JSON.parse(this.response);
           let percent = projects.procent;
@@ -338,22 +338,22 @@
           let months = projects.months;
           let data = projects.datasets[0].data;
           let label = projects.datasets[0].label;
-          
+
           $("#projects-percent").text(percent);
           $("#projects-growth").text(growth);
-          
+
           var areaData = {
             labels: months,
             datasets: [{
-                data: data,
-                backgroundColor: [
-                  '#e5f2ff'
-                ],
-                borderWidth: 2,
-                borderColor: "#3da5f4",
-                fill: 'origin',
-                label: label
-              }
+              data: data,
+              backgroundColor: [
+                '#e5f2ff'
+              ],
+              borderWidth: 2,
+              borderColor: "#3da5f4",
+              fill: 'origin',
+              label: label
+            }
             ]
           };
           var areaOptions = {
@@ -424,8 +424,8 @@
 
       let request = new XMLHttpRequest();
 
-      request.onload = function() {
-        if( this.readyState == 4 && this.status == 200) {
+      request.onload = function () {
+        if (this.readyState == 4 && this.status == 200) {
           let downloads = JSON.parse(this.response);
           let online = downloads.online;
           let offline = downloads.offline;
@@ -440,8 +440,8 @@
             duration: 1400,
             text: {
               autoStyleContainer: true,
-              style : {
-                color : "#fff",
+              style: {
+                color: "#fff",
                 position: 'absolute',
                 left: '40%',
                 top: '50%'
@@ -459,68 +459,68 @@
               width: 6
             },
             // Set default step function for all animate calls
-            step: function(state, circle) {
+            step: function (state, circle) {
               circle.path.setAttribute('stroke', state.color);
               circle.path.setAttribute('stroke-width', state.width);
-      
+
               var value = Math.round(circle.value() * 100);
               if (value === 0) {
                 circle.setText('');
               } else {
                 circle.setText(value);
               }
-      
+
             }
           });
-      
+
           bar.text.style.fontSize = '1rem';
           bar.animate(offline); // Number from 0.0 to 1.0
-    
-            var bar = new ProgressBar.Circle(onlineProgress, {
-              color: '#000',
-              // This has to be the same size as the maximum width to
-              // prevent clipping
-              strokeWidth: 6,
-              trailWidth: 6,
-              easing: 'easeInOut',
-              duration: 1400,
-              text: {
-                autoStyleContainer: true,
-                style : {
-                  color : "#fff",
-                  position: 'absolute',
-                  left: '40%',
-                  top: '50%'
-                }
-              },
-              svgStyle: {
-                width: '90%'
-              },
-              from: {
-                color: '#fda006',
-                width: 6
-              },
-              to: {
-                color: '#fda006',
-                width: 6
-              },
-              // Set default step function for all animate calls
-              step: function(state, circle) {
-                circle.path.setAttribute('stroke', state.color);
-                circle.path.setAttribute('stroke-width', state.width);
-        
-                var value = Math.round(circle.value() * 100);
-                if (value === 0) {
-                  circle.setText('');
-                } else {
-                  circle.setText(value);
-                }
-        
+
+          var bar = new ProgressBar.Circle(onlineProgress, {
+            color: '#000',
+            // This has to be the same size as the maximum width to
+            // prevent clipping
+            strokeWidth: 6,
+            trailWidth: 6,
+            easing: 'easeInOut',
+            duration: 1400,
+            text: {
+              autoStyleContainer: true,
+              style: {
+                color: "#fff",
+                position: 'absolute',
+                left: '40%',
+                top: '50%'
               }
-            });
-        
-            bar.text.style.fontSize = '1rem';
-            bar.animate(online); // Number from 0.0 to 1.0
+            },
+            svgStyle: {
+              width: '90%'
+            },
+            from: {
+              color: '#fda006',
+              width: 6
+            },
+            to: {
+              color: '#fda006',
+              width: 6
+            },
+            // Set default step function for all animate calls
+            step: function (state, circle) {
+              circle.path.setAttribute('stroke', state.color);
+              circle.path.setAttribute('stroke-width', state.width);
+
+              var value = Math.round(circle.value() * 100);
+              if (value === 0) {
+                circle.setText('');
+              } else {
+                circle.setText(value);
+              }
+
+            }
+          });
+
+          bar.text.style.fontSize = '1rem';
+          bar.animate(online); // Number from 0.0 to 1.0
 
         }
       }
@@ -533,17 +533,17 @@
       var CurrentChart = new Chart(CurrentChartCanvas, {
         type: 'bar',
         data: {
-          labels: ["1982","","1993", "", "2003", "", "2013"],
+          labels: ["1982", "", "1993", "", "2003", "", "2013"],
           datasets: [{
-              label: 'Europe',
-              data: [280000, 90000, 150000, 200000, 50000, 150000, 260000, 150000, 260000],
-              backgroundColor: '#405189'
-            },
-            {
-              label: 'Africa',
-              data: [250000, 230000, 130000, 160000, 110000, 230000, 50000, 230000, 50000],
-              backgroundColor: '#3da5f4'
-            }
+            label: 'Europe',
+            data: [280000, 90000, 150000, 200000, 50000, 150000, 260000, 150000, 260000],
+            backgroundColor: '#405189'
+          },
+          {
+            label: 'Africa',
+            data: [250000, 230000, 130000, 160000, 110000, 230000, 50000, 230000, 50000],
+            backgroundColor: '#3da5f4'
+          }
           ]
         },
         options: {
@@ -569,18 +569,18 @@
                 fontStyle: 400,
                 fontSize: 14,
                 stepSize: 100000,
-                callback: function(value) {
+                callback: function (value) {
                   var ranges = [
-                      { divider: 1e6, suffix: 'M' },
-                      { divider: 1e3, suffix: 'k' }
+                    { divider: 1e6, suffix: 'M' },
+                    { divider: 1e3, suffix: 'k' }
                   ];
                   function formatNumber(n) {
-                      for (var i = 0; i < ranges.length; i++) {
-                        if (n >= ranges[i].divider) {
-                            return (n / ranges[i].divider).toString() + ranges[i].suffix;
-                        }
+                    for (var i = 0; i < ranges.length; i++) {
+                      if (n >= ranges[i].divider) {
+                        return (n / ranges[i].divider).toString() + ranges[i].suffix;
                       }
-                      return n;
+                    }
+                    return n;
                   }
                   return formatNumber(value);
                 }
@@ -617,14 +617,14 @@
     // Distribution
     if ($("#distribution-chart").length) {
       let request = new XMLHttpRequest();
-  
+
       request.onload = function () {
         if (this.readyState == 4 && this.status == 200) {
           let distChart = JSON.parse(this.response);
           let labels = distChart.labels;
           let data = distChart.datasets[0].data;
           let cities = distChart.datasets[0].city;
-  
+
           var areaData = {
             labels: labels,
             datasets: [{
@@ -655,14 +655,14 @@
               var text = [];
               text.push('<div class="distribution-chart">');
               let i = 0;
-              cities.forEach(element => {
+              cities.forEach(city => {
                 text.push('<div class="item"><div class="legend-label" style="border: 3px solid ' + chart.data.datasets[0].backgroundColor[i] + '"></div>');
-                text.push(`<p>${element}</p>`);
+                text.push(`<p>${city}</p>`);
                 text.push('</div>');
                 i++;
               });
               text.push('</div>');
-  
+
               return text.join("");
             },
           }
@@ -671,17 +671,17 @@
               var width = chart.chart.width,
                 height = chart.chart.height,
                 ctx = chart.chart.ctx;
-  
+
               ctx.restore();
               var fontSize = .96;
               ctx.font = "600 " + fontSize + "em sans-serif";
               ctx.textBaseline = "middle";
               ctx.fillStyle = "#000";
-  
+
               var text = "70%",
                 textX = Math.round((width - ctx.measureText(text).width) / 2),
                 textY = height / 2;
-  
+
               ctx.fillText(text, textX, textY);
               ctx.save();
             }
@@ -704,7 +704,7 @@
     if ($("#sale-report-chart").length) {
 
       let request = new XMLHttpRequest();
-  
+
       request.onload = function () {
         if (this.readyState == 4 && this.status == 200) {
 
@@ -719,10 +719,10 @@
             data: {
               labels: months,
               datasets: [{
-                  label: location,
-                  data: data,
-                  backgroundColor: ["#3da5f4","#e0f2ff","#3da5f4","#e0f2ff","#3da5f4","#e0f2ff","#3da5f4","#e0f2ff","#3da5f4","#e0f2ff","#3da5f4"]
-                }
+                label: location,
+                data: data,
+                backgroundColor: ["#3da5f4", "#e0f2ff", "#3da5f4", "#e0f2ff", "#3da5f4", "#e0f2ff", "#3da5f4", "#e0f2ff", "#3da5f4", "#e0f2ff", "#3da5f4"]
+              }
               ]
             },
             options: {
@@ -748,18 +748,18 @@
                     padding: 20,
                     fontSize: 14,
                     stepSize: 10000,
-                    callback: function(value) {
+                    callback: function (value) {
                       var ranges = [
-                          { divider: 1e6, suffix: 'M' },
-                          { divider: 1e3, suffix: 'k' }
+                        { divider: 1e6, suffix: 'M' },
+                        { divider: 1e3, suffix: 'k' }
                       ];
                       function formatNumber(n) {
-                          for (var i = 0; i < ranges.length; i++) {
-                            if (n >= ranges[i].divider) {
-                                return (n / ranges[i].divider).toString() + ranges[i].suffix;
-                            }
+                        for (var i = 0; i < ranges.length; i++) {
+                          if (n >= ranges[i].divider) {
+                            return (n / ranges[i].divider).toString() + ranges[i].suffix;
                           }
-                          return n;
+                        }
+                        return n;
                       }
                       return "$" + formatNumber(value);
                     }
@@ -799,11 +799,11 @@
     }
 
     //Sale Report Overview
-    if( $("#sales-report-downloads").length ) {
+    if ($("#sales-report-downloads").length) {
       let request = new XMLHttpRequest();
 
-      request.onload = function() {
-        if( this.readyState == 4 && this.status == 200) {
+      request.onload = function () {
+        if (this.readyState == 4 && this.status == 200) {
           let overview = JSON.parse(this.response);
           let downloads = overview.downloads;
           let purchases = overview.försäljning;
@@ -820,11 +820,11 @@
     }
 
     // Tickets
-    if( $("#ticket-sort").length ) {
+    if ($("#ticket-sort").length) {
       let request = new XMLHttpRequest();
 
-      request.onload = function() {
-        if( this.readyState == 4 && this.status == 200) {
+      request.onload = function () {
+        if (this.readyState == 4 && this.status == 200) {
           let ticketsInfo = JSON.parse(this.response);
           let years = ticketsInfo.years;
           let tickets = ticketsInfo.tickets;
@@ -839,9 +839,9 @@
           tickets.forEach(ticket => {
             let matches = tickets[counter].fullname.match(/\b(\w)/g);
             let shortName = matches.join('');
-            
 
-            let tempTicket =  `<tr>
+
+            let tempTicket = `<tr>
                               <td class="pl-0">
                               <div class="icon-rounded-primary icon-rounded-md">
                               <h4 class="font-weight-medium">${shortName}</h4>
@@ -860,8 +860,8 @@
                               <p class="text-muted mb-0">${tickets[counter].status}</p>
                               </td>
                               </tr>`;
-            
-            counter++; 
+
+            counter++;
             $('#ticket-table tbody').append(tempTicket);
           });
 
@@ -875,8 +875,8 @@
     function sortTable(year) {
       let request = new XMLHttpRequest();
 
-      request.onload = function() {
-        if( this.readyState == 4 && this.status == 200) {
+      request.onload = function () {
+        if (this.readyState == 4 && this.status == 200) {
           let ticketsInfo = JSON.parse(this.response);
           let tickets = ticketsInfo.tickets;
           let sortMatch = new Array();
@@ -884,81 +884,83 @@
 
           // Adds all tickets that matches the selected year to the sortMatch Array.
           tickets.forEach(ticket => {
-              
+
             let date = new Date(ticket.date);
             // Trims the date to only year
             let ticketYear = date.getFullYear();
 
-            if(ticketYear == year) {
+            if (ticketYear == year) {
               sortMatch.push(ticket);
-              console.log(`${ticketYear} | ${year}`);
-            } 
+            }
           });
 
           // Clears the table
           $('#ticket-table').html("");
 
-          // Adds the matched tickets to the table
-          sortMatch.forEach(ticket => {
-            let matches = tickets[counter].fullname.match(/\b(\w)/g);
-            let shortName = matches.join('');
-            
+          // If there are tickets matching the filter do this
+          if (sortMatch.length > 0) {
 
-            let tempTicket =  `<tr>
-                              <td class="pl-0">
-                              <div class="icon-rounded-primary icon-rounded-md">
-                              <h4 class="font-weight-medium">${shortName}</h4>
-                              </div>
-                              </td>
-                              <td>
-                              <p class="mb-0">${tickets[counter].fullname}</p>
-                              <p class="text-muted mb-0">${tickets[counter].city}</p>
-                              </td>
-                              <td>
-                              <p class="mb-0">${tickets[counter].date}</p>
-                              <p class="text-muted mb-0"> ${tickets[counter].time}</p>
-                              </td>
-                              <td>
-                              <p class="mb-0">${tickets[counter].project}</p>
-                              <p class="text-muted mb-0">${tickets[counter].status}</p>
-                              </td>
-                              </tr>`;
-            
-            counter++; 
-            $('#ticket-table').append(tempTicket);
-          });
+            // Adds the matched tickets to the table
+            sortMatch.forEach(ticket => {
+              let matches = tickets[counter].fullname.match(/\b(\w)/g);
+              let shortName = matches.join('');
+
+
+              let tempTicket = `<tr>
+                                <td class="pl-0">
+                                <div class="icon-rounded-primary icon-rounded-md">
+                                <h4 class="font-weight-medium">${shortName}</h4>
+                                </div>
+                                </td>
+                                <td>
+                                <p class="mb-0">${tickets[counter].fullname}</p>
+                                <p class="text-muted mb-0">${tickets[counter].city}</p>
+                                </td>
+                                <td>
+                                <p class="mb-0">${tickets[counter].date}</p>
+                                <p class="text-muted mb-0"> ${tickets[counter].time}</p>
+                                </td>
+                                <td>
+                                <p class="mb-0">${tickets[counter].project}</p>
+                                <p class="text-muted mb-0">${tickets[counter].status}</p>
+                                </td>
+                                </tr>`;
+
+              counter++;
+              $('#ticket-table').append(tempTicket);
+            });
+          } else {
+            $('#ticket-table').append('<tr><td>No tickets matches that filter.</td></tr>');
+          }
         }
-
-        // Clears the array so user can filter again.
-        sortMatch = [];
       }
       request.open("GET", "https://fe18.azurewebsites.net/api/tickets", true);
       request.send();
     }
 
     // Filter tickets click event
-    $("#dropdownMenuDate1").on("click", function() {
-      $(".dropdown-item").on("click", function() {
+    $("#dropdownMenuDate1").on("click", function () {
+      $(".dropdown-item").on("click", function () {
         sortTable($(this).attr("data-year"));
-    })
+      })
     })
 
     // Updates
-    if( $("#updates-list").length ) {
+    if ($("#updates-list").length) {
       let request = new XMLHttpRequest();
 
-      request.onload = function() {
-        if( this.readyState == 4 && this.status == 200) {
+      request.onload = function () {
+        if (this.readyState == 4 && this.status == 200) {
           let updates = JSON.parse(this.response);
           let updatesList = updates.updates;
 
-          updatesList.forEach(element => {
+          updatesList.forEach(update => {
             let updateCard = `<li>
-                              <h6>${element.title}</h6>
-                              <p class="mt-2">${element.description}</p>
-                              <p class="text-muted mb-4"><i class="mdi mdi-clock-outline"></i>${element.time}</p>
+                              <h6>${update.title}</h6>
+                              <p class="mt-2">${update.description}</p>
+                              <p class="text-muted mb-4"><i class="mdi mdi-clock-outline"></i>${update.time}</p>
                               </li>`
-            
+
             $("#updates-list").append(updateCard);
           });
 
@@ -969,19 +971,19 @@
     }
 
     // Open Invoices
-    if( $("#invoices-table").length ) {
+    if ($("#invoices-table").length) {
       let request = new XMLHttpRequest();
 
-      request.onload = function() {
-        if( this.readyState == 4 && this.status == 200) {
+      request.onload = function () {
+        if (this.readyState == 4 && this.status == 200) {
           let invoices = JSON.parse(this.response);
           let invoicesList = invoices.invoices;
 
 
-          invoicesList.forEach(element => {
+          invoicesList.forEach(invoice => {
             let currentStatus
 
-            switch (element.status) {
+            switch (invoice.status) {
               case "Pågående":
                 currentStatus = "success"
                 break;
@@ -994,19 +996,18 @@
             }
             let updateCard = `<tr>
             
-                              <td>${element.invoicenumber}</td>
-                              <td>${element.customer}</td>
-                              <td>${element.shipping}</td>
-                              <td class="font-weight-bold">${element.totalprice}</td>
-                              <td>${element.customerprice}</td>
+                              <td>${invoice.invoicenumber}</td>
+                              <td>${invoice.customer}</td>
+                              <td>${invoice.shipping}</td>
+                              <td class="font-weight-bold">${invoice.totalprice}</td>
+                              <td>${invoice.customerprice}</td>
                               <td>
-                              <div class="badge badge-${currentStatus} badge-fw">${element.status}</div>
+                              <div class="badge badge-${currentStatus} badge-fw">${invoice.status}</div>
                               </td>
                               </tr>`
-            
+
             $("#invoices-table").append(updateCard);
           });
-
         }
       }
       request.open("GET", "https://fe18.azurewebsites.net/api/openinvoices", true);
