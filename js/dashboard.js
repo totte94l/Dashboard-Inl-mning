@@ -831,12 +831,12 @@
 
           //Genererar åren i dropdown'en
           let counter = 0;
-          years.forEach(element => {
-            $("#ticket-sort").append(`<a class="dropdown-item" data-year="${element}">${element}`);
+          years.forEach(year => {
+            $("#ticket-sort").append(`<a class="dropdown-item" data-year="${year}">${year}`);
           });
 
           //Genererar en tabell med alla tickets
-          tickets.forEach(element => {
+          tickets.forEach(ticket => {
             let matches = tickets[counter].fullname.match(/\b(\w)/g);
             let shortName = matches.join('');
             
@@ -882,14 +882,15 @@
           let sortMatch = new Array();
           let counter = 0;
 
-          // Creates a array with all tickets that matches the selected year
-          tickets.forEach(element => {
+          // Adds all tickets that matches the selected year to the sortMatch Array.
+          tickets.forEach(ticket => {
               
-            let date = new Date(element.date);
+            let date = new Date(ticket.date);
+            // Trims the date to only year
             let ticketYear = date.getFullYear();
 
             if(ticketYear == year) {
-              sortMatch.push(element);
+              sortMatch.push(ticket);
               console.log(`${ticketYear} | ${year}`);
             } 
           });
@@ -898,7 +899,7 @@
           $('#ticket-table').html("");
 
           // Adds the matched tickets to the table
-          sortMatch.forEach(element => {
+          sortMatch.forEach(ticket => {
             let matches = tickets[counter].fullname.match(/\b(\w)/g);
             let shortName = matches.join('');
             
@@ -928,7 +929,7 @@
           });
         }
 
-        // Clears the array so user can filter again. Missade nästan detta då det inte fanns några andra år än 2019 inlagt!
+        // Clears the array so user can filter again.
         sortMatch = [];
       }
       request.open("GET", "https://fe18.azurewebsites.net/api/tickets", true);
