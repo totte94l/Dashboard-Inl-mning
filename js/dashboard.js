@@ -899,7 +899,7 @@
 
             // Adds the matched tickets to the table
             sortMatch.forEach(ticket => {
-              let matches = tickets[counter].fullname.match(/\b(\w)/g);
+              let matches = ticket.fullname.match(/\b(\w)/g);
               let shortName = matches.join('');
 
 
