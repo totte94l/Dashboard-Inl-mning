@@ -476,7 +476,7 @@
           bar.text.style.fontSize = '1rem';
           bar.animate(offline); // Number from 0.0 to 1.0
 
-          var bar = new ProgressBar.Circle(onlineProgress, {
+          var bar2 = new ProgressBar.Circle(onlineProgress, {
             color: '#000',
             // This has to be the same size as the maximum width to
             // prevent clipping
@@ -519,8 +519,8 @@
             }
           });
 
-          bar.text.style.fontSize = '1rem';
-          bar.animate(online); // Number from 0.0 to 1.0
+          bar2.text.style.fontSize = '1rem';
+          bar2.animate(online); // Number from 0.0 to 1.0
 
         }
       }
