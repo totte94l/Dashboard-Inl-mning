@@ -830,14 +830,13 @@
           let tickets = ticketsInfo.tickets;
 
           //Genererar åren i dropdown'en
-          let counter = 0;
           years.forEach(year => {
             $("#ticket-sort").append(`<a class="dropdown-item" data-year="${year}">${year}`);
           });
 
           //Genererar en tabell med alla tickets
           tickets.forEach(ticket => {
-            let matches = tickets[counter].fullname.match(/\b(\w)/g);
+            let matches = ticket.fullname.match(/\b(\w)/g);
             let shortName = matches.join('');
 
 
@@ -848,21 +847,19 @@
                               </div>
                               </td>
                               <td>
-                              <p class="mb-0">${tickets[counter].fullname}</p>
-                              <p class="text-muted mb-0">${tickets[counter].city}</p>
+                              <p class="mb-0">${ticket.fullname}</p>
+                              <p class="text-muted mb-0">${ticket.city}</p>
                               </td>
                               <td>
-                              <p class="mb-0">${tickets[counter].date}</p>
-                              <p class="text-muted mb-0"> ${tickets[counter].time}</p>
+                              <p class="mb-0">${ticket.date}</p>
+                              <p class="text-muted mb-0"> ${ticket.time}</p>
                               </td>
                               <td>
-                              <p class="mb-0">${tickets[counter].project}</p>
-                              <p class="text-muted mb-0">${tickets[counter].status}</p>
+                              <p class="mb-0">${ticket.project}</p>
+                              <p class="text-muted mb-0">${ticket.status}</p>
                               </td>
                               </tr>`;
-
-            counter++;
-            $('#ticket-table tbody').append(tempTicket);
+            $('#ticket-table').append(tempTicket);
           });
 
         }
@@ -913,20 +910,18 @@
                                 </div>
                                 </td>
                                 <td>
-                                <p class="mb-0">${tickets[counter].fullname}</p>
-                                <p class="text-muted mb-0">${tickets[counter].city}</p>
+                                <p class="mb-0">${ticket.fullname}</p>
+                                <p class="text-muted mb-0">${ticket.city}</p>
                                 </td>
                                 <td>
-                                <p class="mb-0">${tickets[counter].date}</p>
-                                <p class="text-muted mb-0"> ${tickets[counter].time}</p>
+                                <p class="mb-0">${ticket.date}</p>
+                                <p class="text-muted mb-0"> ${ticket.time}</p>
                                 </td>
                                 <td>
-                                <p class="mb-0">${tickets[counter].project}</p>
-                                <p class="text-muted mb-0">${tickets[counter].status}</p>
+                                <p class="mb-0">${ticket.project}</p>
+                                <p class="text-muted mb-0">${ticket.status}</p>
                                 </td>
                                 </tr>`;
-
-              counter++;
               $('#ticket-table').append(tempTicket);
             });
           } else {
