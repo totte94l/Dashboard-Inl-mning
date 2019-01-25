@@ -974,9 +974,8 @@
           let invoices = JSON.parse(this.response);
           let invoicesList = invoices.invoices;
 
-
           invoicesList.forEach(invoice => {
-            let currentStatus
+            let currentStatus;
 
             switch (invoice.status) {
               case "Pågående":
